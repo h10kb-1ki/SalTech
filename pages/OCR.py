@@ -6,6 +6,9 @@ import base64
 from google.oauth2 import service_account
 from google.cloud import vision
 
+img = Image.open('logo.png')
+st.image(img, use_column_width=True)
+
 st.title('光学文字認識')
 st.write('Powered by google Cloud Vision')
 file_type = st.selectbox('画像のファイル形式を選択', ['png', 'jpg', 'jpeg' 'gif', 'bmp', 'tif', 'svg'])

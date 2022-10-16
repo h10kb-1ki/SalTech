@@ -2,6 +2,7 @@ import streamlit as st
 import math
 import pandas as pd
 import matplotlib.pyplot as plt
+from PIL import Image
 
 global age
 global gen
@@ -10,6 +11,9 @@ global weight
 global SCr
 global dose
 global tau
+
+img = Image.open('logo.png')
+st.image(img, use_column_width=True)
 
 st.title('VCMパラメータ計算')
 

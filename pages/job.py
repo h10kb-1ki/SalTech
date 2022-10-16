@@ -24,23 +24,23 @@ def shift_data():
 
     return title_list, ref_list
 
-st.title('業務')
-weekly = st.checkbox('週間業務')
+st.title('シフト・休暇')
+weekly = st.checkbox('週間業務表')
 if weekly:
     title_list, ref_list = shift_data()
     for i in range(0, len(title_list)):
         if '週間' in title_list[i]:
             st.write('■' + title_list[i])
-            st.write('  '+ ref_list[i])
+            st.write(ref_list[i])
 
-monthly = st.checkbox('月間業務')
+monthly = st.checkbox('月間勤務表')
 if monthly:
     title_list, ref_list = shift_data()
     for i in range(0, len(title_list)):
-        if '業務' in title_list[i]:
+        if '勤務' in title_list[i]:
             if not '週間' in title_list[i]:
                 st.write('■' + title_list[i])
-                st.write('  '+ ref_list[i])
+                st.write(ref_list[i])
     
 yasumi = st.checkbox('休暇表')
 if yasumi:
@@ -48,4 +48,4 @@ if yasumi:
     for i in range(0, len(title_list)):
         if '休' in title_list[i]:
             st.write('■' + title_list[i])
-            st.write('  '+ ref_list[i])
+            st.write(ref_list[i])

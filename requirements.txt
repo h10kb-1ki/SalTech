@@ -1,0 +1,9 @@
+requests
+bs4
+datetime
+
+Image
+qrcode
+google-cloud-vision
+google-oauth
+matplotlib

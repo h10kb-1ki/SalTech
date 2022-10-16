@@ -135,7 +135,7 @@ if weather:
         st.write('最高気温:'+ data_list[0] +'　最低気温:'+ data_list[1])
         st.write('午前：'+ data_list[2] +'　午後：'+ data_list[3])
 
-        st.write('■ 明日の天気')
+        st.write('■'+ tomorrow)
         st.image(icon_tomorrow)
         st.write('最高気温:'+ data_list[4] +'　最低気温:'+ data_list[5])
         st.write('午前：'+ data_list[6] +'　午後：'+ data_list[7])

@@ -1,7 +1,7 @@
 requests
 bs4
 datetime
-
+openpyxl
 Image
 qrcode
 google-cloud-vision

@@ -5,8 +5,11 @@ import datetime
 from PIL import Image
 import io
 import re
+from pandas_datareader import data
 import pandas as pd
 from dateutil.relativedelta import relativedelta
+import mplfinance as mpf
+import altair as alt
 import openpyxl as xl
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -194,6 +197,53 @@ if LINE:
             st.balloons()
         else:
             st.write('送信に失敗しました')
+
+st.write('-----------------------------------------------------')                
+Finance = st.checkbox('Finance')
+if Finance:
+    st.set_option('deprecation.showPyplotGlobalUse', False)
+    dic = {'サントリー': '2587.JP',
+      'アサヒ': '2502.JP',
+      'キリン': '2503.JP',
+      'サッポロ': '2501.JP',
+      'タケダ': '4502.JP',
+      'アステラス': '4503.JP',
+      '大塚': '4578.JP',
+      '第一三共': '4568.JP',
+      'エーザイ': '4523.JP',
+      '中外': '4519.JP',
+      '大日本住友': '4506.JP',
+      '塩野義': '4507.JP',
+      '協和キリン': '4151.JP',
+      '小野薬品': '4528.JP'}
+    name = list(dic.keys())
+    today = datetime.datetime.now()
+    start_point = st.selectbox('開始', ('1ヶ月前', '3ヶ月前', '半年前', '1年前', '任意'), index=2)
+    if start_point == '1ヶ月前':
+        start = today - relativedelta(months=1)
+    elif start_point == '3ヶ月前':
+        start = today - relativedelta(months=3)
+    elif start_point == '半年前':
+        start = today - relativedelta(months=6)
+    elif start_point == '1年前':
+        start = today - relativedelta(months=12) 
+    else:
+        start = st.date_input('開始')
+
+    end = st.date_input('終了')
+    company_name = st.selectbox('銘柄', name, index=11)
+    company_code = dic[company_name]
+
+    df = data.DataReader(company_code, 'stooq', start, end)
+    df = df.sort_values('Date', ascending=True)
+
+    cs  = mpf.make_mpf_style(gridcolor="lightgray", facecolor="white", edgecolor="#202426", figcolor="white", 
+            rc={"xtick.color":"black", "xtick.labelsize":12, 
+                "ytick.color":"black", "ytick.labelsize":12, 
+                "axes.labelsize":15, "axes.labelcolor":"black"})
+    fig = mpf.plot(df, type='candle', volume=True, mav=(5, 25, 50), figratio=(12,4), style=cs)
+    st.pyplot(fig)
+
 
 st.write('-----------------------------------------------------')  
 hobby = st.checkbox('Hobby & Health')

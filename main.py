@@ -113,7 +113,8 @@ if weather:
         soup = BeautifulSoup(res.text, "html.parser")
 
         day_ = soup.find_all(class_='wTable__item')
-        today = day_[6].text
+        today = day_[5].text
+        tomorrow = day_[10].text
         data = soup.find_all(class_='text wTable__item')
         data_list = []
         for i in range(0, 8):

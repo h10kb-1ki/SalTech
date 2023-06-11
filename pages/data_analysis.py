@@ -2,8 +2,8 @@ import streamlit as st
 from PIL import Image
 
 st.title('論文の読み方')
-image = Image.open('table.png')
-st.image(image)
+#image = Image.open('table.png')
+#st.image(image)
 
 a = st.number_input('介入群・Outcome(+)', step=1)
 b = st.number_input('介入群・Outcome(-)', step=1)

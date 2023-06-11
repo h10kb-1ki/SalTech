@@ -5,8 +5,8 @@ img = Image.open('logo.png')
 st.image(img, use_column_width=True)
 
 st.title('論文の読み方')
-image = Image.open('table.png')
-st.image(image)
+img2 = Image.open('table.png')
+st.image(img2)
 
 a = st.number_input('介入群・Outcome(+)', step=1)
 b = st.number_input('介入群・Outcome(-)', step=1)

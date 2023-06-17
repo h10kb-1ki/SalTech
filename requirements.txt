@@ -15,4 +15,4 @@ japanize_matplotlib
 qrcode
 google-cloud-vision
 google-oauth
-remove
+rembg==2.0.37

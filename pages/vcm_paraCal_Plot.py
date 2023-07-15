@@ -20,17 +20,17 @@ st.title('VCMパラメータ計算')
 st.sidebar.title('基本情報')
 age = st.sidebar.slider('■年齢', 0, 100, 60)
 gen = st.sidebar.radio('■性別', ('M', 'F'), index=0)
-height = st.sidebar.slider('■身長（cm）', 120, 200, 160)
-weight = st.sidebar.slider('■体重（kg）', 20, 150, 50)
+height = st.sidebar.slider('■身長 (cm)', 120, 200, 160)
+weight = st.sidebar.slider('■体重 (kg)', 20, 150, 50)
 SCr = st.sidebar.slider('■SCr', 0.00, 2.50, 0.70)
 
 st.sidebar.title('設定値')
 dose_select = st.sidebar.radio('投与量の入力方法', ('選択', '任意'), index=0)
 if dose_select ==  '選択':
-    dose = st.sidebar.slider('■投与量（mg）', 250, 4000, 2000, step=250)
+    dose = st.sidebar.slider('■投与量 (mg)', 250, 4000, 2000, step=250)
 elif dose_select == '任意':
-    dose = st.sidebar.number_input('■投与量（mg）')
-tau = st.sidebar.radio('■投与間隔（hr）', (6, 8, 12, 24, 48), index=3)
+    dose = st.sidebar.number_input('■投与量 (mg)')
+tau = st.sidebar.radio('■投与間隔 (hr)', (6, 8, 12, 24, 48), index=3)
 
 """
 ## ―体格―
@@ -42,7 +42,7 @@ BMI = cal_BMI(height, weight)
 
 if BMI >25:
     adj_BW = 25 * (height/100)**2
-    comment = f'  ※補正体重 {round(adj_BW, 1)} (kg)を使用してください'
+    comment = f'＜補正体重 {round(adj_BW, 1)} (kg)を使用してください＞'
 else:
     comment = ''
 'BMI = ', round(BMI, 2), comment
@@ -109,7 +109,7 @@ else:
     kel_max =1000
 
 f_Vd = st.slider('Vd', 0.0, 100.0, round(Vd, 1), step=0.1)
-f_kel = st.slider('kel（x 0.001）', 0, kel_max, int(kel*1000))
+f_kel = st.slider('kel (x 0.001)', 0, kel_max, int(kel*1000))
 
 f_CLvcm = f_Vd * (f_kel/1000)
 'CLvcm (L/hr) = ', round(f_CLvcm, 2)
@@ -175,7 +175,7 @@ if S2_display == True:
     ## ―Simulation #2―
     """
     f2_Vd = st.slider('Vd', 0.0, 100.0, 30.0, step=0.1)
-    f2_kel = st.slider('kel（x 0.001）', 0, kel_max, 100)
+    f2_kel = st.slider('kel (x 0.001)', 0, kel_max, 100)
 
     f2_CLvcm = f2_Vd * (f2_kel/1000)
     'CLvcm (L/hr) = ', round(f2_CLvcm, 2)

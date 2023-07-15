@@ -3,6 +3,7 @@ import math
 import pandas as pd
 import matplotlib.pyplot as plt
 from PIL import Image
+import numpy as np
 
 global age
 global gen
@@ -154,7 +155,7 @@ ax.set_xlim([0, 120])
 
 start, end = ax.get_xlim()
 stepsize=24
-ax.xaxis.set_ticks(pd.np.arange(start, end, stepsize))
+ax.xaxis.set_ticks(np.arange(start, end, stepsize))
 
 ax.plot(time, C, linewidth=2, color='darkturquoise')
 plt.xlabel('Time (hr)', fontsize=18)

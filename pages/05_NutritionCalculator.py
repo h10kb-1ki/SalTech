@@ -37,7 +37,7 @@ sf = dict_sf[f'{sf_str}']
 st.sidebar.write('')
 BEE = st.sidebar.selectbox('■基礎代謝量の算出方法', ['Harris-Benedict式', '簡易式', '体重から推測'])
 
-@st.cache
+@st.cache_data
 def calc_basic(bw, height, age, gender, af, sf):
     BMI = bw/(height/100)**2
     if gender == '男性':
@@ -48,7 +48,7 @@ def calc_basic(bw, height, age, gender, af, sf):
         BEE_easy = 10.8*bw + 620
     BEE_bw = 25*bw
     return BMI, BEE_HB, BEE_easy, BEE_bw
-@st.cache
+@st.cache_data
 def totalCal(bee, af, sf):
     totalCal = bee*af*sf
     return totalCal

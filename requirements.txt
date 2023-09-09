@@ -2,6 +2,7 @@ requests
 bs4
 datetime
 Image
+ImageGrab
 matplotlib
 pandas
 mplfinance

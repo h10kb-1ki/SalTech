@@ -11,10 +11,9 @@ img = Image.open('logo.png')
 st.image(img, use_column_width=True)
 
 st.title('光学文字認識')
-st.write('Powered by google Cloud Vision')
+st.write('---Powered by google Cloud Vision---')
 
 photo = st.checkbox('写真')
-screenshot = st.checkbox('スクリーンショット')
 if photo:
     file_type = st.selectbox('画像のファイル形式を選択', ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'tif', 'svg'])
     uploaded_file = st.file_uploader("ファイルアップロード", type=file_type, accept_multiple_files=False)
@@ -57,7 +56,8 @@ if photo:
                     output_text += '\n'
         st.write('■OCR結果：')
         st.write(output_text)
-
+        
+screenshot = st.checkbox('スクリーンショット')
 if screenshot:
     def ocr():    
         img = ImageGrab.grabclipboard()  #クリップボードの画像を取得
@@ -85,7 +85,8 @@ if screenshot:
                         output_text += '\n'
         return output_text
 
-    st.title('Screenshot OCR for WebApp')
+    st.write('Screenshot OCR for WebApp')
     btn = st.button('OCR')
     if btn:
+        st.write('■OCR結果：')
         st.write(ocr())

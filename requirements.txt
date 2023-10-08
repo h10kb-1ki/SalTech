@@ -17,4 +17,4 @@ qrcode
 google-cloud-vision
 google-oauth
 rembg==2.0.37
-numpy==1.22.2
+numpy

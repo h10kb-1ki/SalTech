@@ -142,10 +142,8 @@ if news:
             title = elems[i].text
             # linkを取得
             link = elems[i].attrs['href']
-            st.write(f'[{title}]({link})')
-            st.write(f'{title}  \n'
-                    + f'{link}'
-                    )
+            st.write(f'・[{title}]({link})')
+
     seiyaku = st.checkbox('製薬業界ニュース')
     if seiyaku ==True:
         url = 'https://answers.ten-navi.com/pharmanews/pharma_category/1/'
@@ -161,9 +159,8 @@ if news:
             if tag[i].text == 'ニュース解説':
                 title = titles[i].text
                 link = ref[i].attrs['href']
-                st.write(f'{title}  \n'
-                        + f'{link}'
-                        )
+                st.write(f'・[{title}]({link})')
+
 st.write('-----------------------------------------------------')
 LINE = st.checkbox('LINE')
 if LINE:
@@ -233,43 +230,11 @@ if Finance:
 
 st.write('-----------------------------------------------------')  
 hobby = st.checkbox('Hobby & Health')
-if hobby:    
-    '''
-    ###### ▶Pep Up
-    '''
-    st.markdown('https://pepup.life/home', unsafe_allow_html=True)
+if hobby:
+    st.write('▶[Pep Up](https://pepup.life/home)')
 
 st.write('-----------------------------------------------------')                
 MyLib = st.checkbox('Library')
 if MyLib:
-    '''
-    ###### ▶一郎の部屋
-    '''
-    st.markdown('https://sites.google.com/view/tdmichiro/%E3%83%9B%E3%83%BC%E3%83%A0', unsafe_allow_html=True)
-    
-    kampo = st.checkbox('漢方比較')
-    if kampo == True:
-        wb = xl.load_workbook('kampo.xlsx')
-        ws = []
-        for i in wb.worksheets:
-            ws.append(i.title)
-
-        df = pd.read_excel('kampo.xlsx', sheet_name=ws[0], header=0, index_col=0)
-        for j in range(1, len(ws)):
-            df_sheet = pd.read_excel('kampo.xlsx', sheet_name=ws[j], header=0, index_col=0)
-            df = df.merge(df_sheet, how='outer', left_index=True, right_index=True)
-
-        st.title('漢方：含有生薬の比較')
-        st.write('1日量（ツムラ製品、通常量）中の生薬含有量を表示')
-        kampo_list = sorted(df.columns)
-        selection = st.multiselect('漢方を選択', kampo_list)
-
-        df = df[selection]
-        df.dropna(subset=selection, how='all', inplace=True)
-        fig, ax = plt.subplots(1, 1, figsize=(12, 10))
-        ax = sns.heatmap(df, annot=True, fmt='.1f', cmap='Blues', vmax=10, vmin=0, ax=ax)
-
-        btn = st.button('表示')
-
-        if btn == True:
-            st.pyplot(fig)
+    st.write('▶[一郎の部屋](https://sites.google.com/view/tdmichiro/%E3%83%9B%E3%83%BC%E3%83%A0)')
+    st.write('▶[DIサイト](https://ajdididi-di-search-aydtef.streamlit.app/)')

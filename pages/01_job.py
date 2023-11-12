@@ -30,8 +30,7 @@ if weekly:
     title_list, ref_list = shift_data()
     for i in range(0, len(title_list)):
         if '週間' in title_list[i]:
-            st.write('■' + title_list[i])
-            st.write(ref_list[i])
+            st.write(f'■[{title_list[i]}]({ref_list[i]})')
 
 monthly = st.checkbox('月間勤務表')
 if monthly:
@@ -39,13 +38,11 @@ if monthly:
     for i in range(0, len(title_list)):
         if '勤務' in title_list[i]:
             if not '週間' in title_list[i]:
-                st.write('■' + title_list[i])
-                st.write(ref_list[i])
+                st.write(f'■[{title_list[i]}]({ref_list[i]})')
     
 yasumi = st.checkbox('休暇表')
 if yasumi:
     title_list, ref_list = shift_data()
     for i in range(0, len(title_list)):
         if '休' in title_list[i]:
-            st.write('■' + title_list[i])
-            st.write(ref_list[i])
+            st.write(f'■[{title_list[i]}]({ref_list[i]})')

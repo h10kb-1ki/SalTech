@@ -35,7 +35,7 @@ if traffic:
     else:
         st.write('***遅延あり***')
     '''
-    ###### ▶JR運行情報
+    ###### ▶[JR運行情報]('https://traininfo.jr-central.co.jp/zairaisen/status_detail.html?line=10001&lang=ja')
     '''
     st.markdown('https://traininfo.jr-central.co.jp/zairaisen/status_detail.html?line=10001&lang=ja', unsafe_allow_html=True)
     st.write('')

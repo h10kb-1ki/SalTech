@@ -23,9 +23,7 @@ st.image(img, use_column_width=True)
 st.write('-----------------------------------------------------')
 traffic = st.checkbox('Traffic')
 if traffic:
-    '''
-    #### 東海道本線[豊橋～米原]
-    '''
+    st.write('■東海道本線[豊橋～米原]')
     url = 'https://transit.yahoo.co.jp/traininfo/detail/192/193/'
     res = requests.get(url)
     soup = BeautifulSoup(res.text, "html.parser")
@@ -35,12 +33,9 @@ if traffic:
     else:
         st.write('***遅延あり***')
     st.write('▶[JR運行情報](https://traininfo.jr-central.co.jp/zairaisen/status_detail.html?line=10001&lang=ja)')
-    
-    #st.markdown('https://traininfo.jr-central.co.jp/zairaisen/status_detail.html?line=10001&lang=ja', unsafe_allow_html=True)
     st.write('')
-    '''
-    #### 名鉄名古屋本線
-    '''
+
+    st.write('■名鉄名古屋本線')
     url = 'https://transit.yahoo.co.jp/traininfo/detail/208/0/'
     res = requests.get(url)
     soup = BeautifulSoup(res.text, "html.parser")
@@ -49,22 +44,14 @@ if traffic:
         st.write(statusM.text)
     else:
         st.write('***遅延あり***')
-    '''
-    ###### ▶名鉄（本線）運行情報
-    '''
-    st.markdown('https://top.meitetsu.co.jp/em/', unsafe_allow_html=True)
-    st.write('')
-    st.write('')
-    
-    '''
-    ###### ▶名鉄バス（安城駅発 更生病院行）
-    '''
-    st.markdown('https://navi.meitetsu-bus.co.jp/mb/DepQR.aspx?p=320103000', unsafe_allow_html=True)
 
-    '''
-    ###### ▶乗り換え案内
-    '''
-    st.markdown('https://www.jorudan.co.jp/norikae/', unsafe_allow_html=True)
+    st.write('▶[名鉄（本線）運行情報](https://top.meitetsu.co.jp/em/)')
+    st.write('')
+    st.write('')
+
+    st.write('▶[名鉄バス（安城駅発 更生病院行）](https://navi.meitetsu-bus.co.jp/mb/DepQR.aspx?p=320103000)')
+    st.write('▶[乗り換え案内](https://www.jorudan.co.jp/norikae/)')
+
 
 st.write('-----------------------------------------------------')
 weather = st.checkbox('Weather')
@@ -138,10 +125,8 @@ if weather:
         st.image(icon_tomorrow)
         st.write('最高気温:'+ data_list[4] +'　最低気温:'+ data_list[5])
         st.write('午前：'+ data_list[6] +'　午後：'+ data_list[7])
-    '''
-    ###### ▶雨雲レーダー
-    '''
-    st.markdown('https://tenki.jp/radar/map/', unsafe_allow_html=True)
+
+    st.write('▶[雨雲レーダー](https://tenki.jp/radar/map/)')
 
 st.write('-----------------------------------------------------')
 news = st.checkbox('NEWS')
@@ -157,6 +142,7 @@ if news:
             title = elems[i].text
             # linkを取得
             link = elems[i].attrs['href']
+            st.write(f'[{title}]({link})')
             st.write(f'{title}  \n'
                     + f'{link}'
                     )

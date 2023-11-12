@@ -31,7 +31,8 @@ if traffic:
     soup = BeautifulSoup(res.text, "html.parser")
     statusJ = soup.find('dd', class_='normal')
     if statusJ:
-        st.write(statusJ.text + '  \n▶[JR運行情報](https://traininfo.jr-central.co.jp/zairaisen/status_detail.html?line=10001&lang=ja)')
+        st.write(statusJ.text)
+        st.write('▶[JR運行情報](https://traininfo.jr-central.co.jp/zairaisen/status_detail.html?line=10001&lang=ja)')
     else:
         st.write('***遅延あり***  \n▶[JR運行情報](https://traininfo.jr-central.co.jp/zairaisen/status_detail.html?line=10001&lang=ja)')
     

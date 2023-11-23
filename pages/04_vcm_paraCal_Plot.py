@@ -220,7 +220,7 @@ if S2_display == True:
 
     start, end = ax2.get_xlim()
     stepsize=24
-    ax2.xaxis.set_ticks(pd.np.arange(start, end, stepsize))
+    ax2.xaxis.set_ticks(np.arange(start, end, stepsize))
 
     ax2.plot(time, Con, linewidth=2, color='hotpink')
     plt.xlabel('Time (hr)', fontsize=18)
@@ -242,7 +242,7 @@ if S2_display == True:
 
         start, end = ax.get_xlim()
         stepsize=24
-        ax.xaxis.set_ticks(pd.np.arange(start, end, stepsize))
+        ax.xaxis.set_ticks(np.arange(start, end, stepsize))
 
         ax.plot(time, C, linewidth=2, color='darkturquoise')
         ax.plot(time, Con, linewidth=2, color='hotpink')

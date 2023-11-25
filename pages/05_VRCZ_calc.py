@@ -4,8 +4,8 @@ import pandas as pd
 import streamlit as st
 from PIL import Image
 
-#img = Image.open('logo.png')
-#st.image(img, use_column_width=True)
+img = Image.open('logo.png')
+st.image(img, use_column_width=True)
 
 st.title('VRCZ解析')
 
@@ -52,23 +52,26 @@ def non_linear(doseList, concList):
                 )
     return Vmax, Km, scatter, points
 
-radio = st.radio('データ入力', ['スライダー（2ポイント）', '直接入力', 'データ upload'], 
-                 horizontal=True
-                 )
-st.write('---------------------')
+radio = st.sidebar.radio('データ入力', ['スライダー（2ポイント）', '直接入力', 'データ upload'], 
+                        #horizontal=True
+                        )
 
 if radio == 'スライダー（2ポイント）':
+    st.write('-----------------')
     dose1 = st.slider('１日投与量①', 0, 600, step=50)
     conc1 = st.slider('血中濃度①', 0.0, 10.0, step=0.01)
+    st.write('-----------------')
     dose2 = st.slider('１日投与量②', 0, 600, step=50)
     conc2 = st.slider('血中濃度②', 0.0, 10.0, step=0.01)
     doseList = [dose1, dose2]
     concList = [conc1, conc2]
+    st.write('-----------------')
     
     btn = st.button('解析')
     if btn:
         Vmax, Km, scatter, points = non_linear(doseList, concList)
-        st.altair_chart(scatter + points, theme=None)
+        rule = (alt.Chart().mark_rule(strokeDash=[5, 5], size=1, color='red').encode(y=alt.datum(4)))
+        st.altair_chart(scatter + points + rule, theme=None)
         st.write(f'Km = {Km:.2f}(μg/mL)  \n'
                 + f'Vmax = {Vmax:.2f}(mg/d)  \n'
                 )
@@ -77,6 +80,7 @@ elif radio == '直接入力':
     if 'num' not in st.session_state:
         st.session_state.num = ''
     num = int(st.number_input('採血ポイント数', min_value=2, step=1))
+    st.write('-----------------')
     doseList = []
     concList = []
     col1, col2 = st.columns(2)
@@ -87,13 +91,14 @@ elif radio == '直接入力':
         with col2:
             c = st.number_input(f'血中濃度{i+1}(μg/mL)')
             concList.append(c)
-    
+    st.write('-----------------')
     btn = st.button('解析')
     if btn:
         Vmax, Km, scatter, points = non_linear(doseList, concList)
         col3, col4 = st.columns([3, 2])
+        rule = (alt.Chart().mark_rule(strokeDash=[5, 5], size=1, color='red').encode(y=alt.datum(4)))
         with col3:
-            st.altair_chart(scatter + points, theme=None)
+            st.altair_chart(scatter + points + rule, theme=None)
         with col4:
             st.write(f'Km = {Km:.2f}(μg/mL)  \n'
                     + f'Vmax = {Vmax:.2f}(mg/d)  \n'

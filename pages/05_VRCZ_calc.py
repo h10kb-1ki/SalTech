@@ -70,8 +70,7 @@ if radio == 'スライダー（2ポイント）':
     btn = st.button('解析')
     if btn:
         Vmax, Km, scatter, points = non_linear(doseList, concList)
-        rule = (alt.Chart().mark_rule(strokeDash=[5, 5], size=1, color='red').encode(y=alt.datum(4)))
-        st.altair_chart(scatter + points + rule, theme=None)
+        st.altair_chart(scatter + points, theme=None)
         st.write(f'Km = {Km:.2f}(μg/mL)  \n'
                 + f'Vmax = {Vmax:.2f}(mg/d)  \n'
                 )
@@ -96,9 +95,8 @@ elif radio == '直接入力':
     if btn:
         Vmax, Km, scatter, points = non_linear(doseList, concList)
         col3, col4 = st.columns([3, 2])
-        rule = (alt.Chart().mark_rule(strokeDash=[5, 5], size=1, color='red').encode(y=alt.datum(4)))
         with col3:
-            st.altair_chart(scatter + points + rule, theme=None)
+            st.altair_chart(scatter + points, theme=None)
         with col4:
             st.write(f'Km = {Km:.2f}(μg/mL)  \n'
                     + f'Vmax = {Vmax:.2f}(mg/d)  \n'

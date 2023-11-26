@@ -7,7 +7,7 @@ from PIL import Image
 img = Image.open('logo.png')
 st.image(img, use_column_width=True)
 
-st.title('VRCZ解析')
+st.title('非線形血中濃度解析')
 
 def non_linear(doseList, concList):
     # Lineweaver–Burk plot

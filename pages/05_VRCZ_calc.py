@@ -52,28 +52,37 @@ def non_linear(doseList, concList):
                 )
     return Vmax, Km, scatter, points
 
-radio = st.sidebar.radio('データ入力', ['スライダー（2ポイント）', '直接入力', 'データ upload'], 
+radio = st.sidebar.radio('データ入力', ['スライダー', '直接入力', 'データupload'], 
                         #horizontal=True
                         )
 
-if radio == 'スライダー（2ポイント）':
+if radio == 'スライダー':
+    if 'num' not in st.session_state:
+        st.session_state.num = ''
+    num = int(st.slider('採血ポイント数', min_value=2, step=1, max_value=10))
     st.write('-----------------')
-    dose1 = st.slider('１日投与量①', 0, 600, step=50)
-    conc1 = st.slider('血中濃度①', 0.0, 10.0, step=0.01)
+    doseList = []
+    concList = []
+    col1, col2 = st.columns(2)
+    for i in range(num):
+        with col1:
+            d = st.slider(f'１日投与量{num+1}', 0, 600, step=50)
+            doseList.append(d)
+        with col2:
+            c = st.slider(f'血中濃度{num+1}', 0.0, 10.0, step=0.01)
+            concList.append(c)
     st.write('-----------------')
-    dose2 = st.slider('１日投与量②', 0, 600, step=50)
-    conc2 = st.slider('血中濃度②', 0.0, 10.0, step=0.01)
-    doseList = [dose1, dose2]
-    concList = [conc1, conc2]
-    st.write('-----------------')
-    
     btn = st.button('解析')
     if btn:
         Vmax, Km, scatter, points = non_linear(doseList, concList)
-        st.altair_chart(scatter + points, theme=None)
-        st.write(f'Km = {Km:.2f}(μg/mL)  \n'
-                + f'Vmax = {Vmax:.2f}(mg/d)  \n'
-                )
+        col3, col4 = st.columns([3, 2])
+        with col3:
+            st.altair_chart(scatter + points, theme=None)
+        with col4:
+            st.write(f'Km = {Km:.2f}(μg/mL)  \n'
+                    + f'Vmax = {Vmax:.2f}(mg/d)  \n')
+        for i in range(num):
+            st.write(f'データ{i+1}：{doseList[i]}(mg/d)、{concList[i]}(μg/mL)')
 
 elif radio == '直接入力':
     if 'num' not in st.session_state:
@@ -99,12 +108,33 @@ elif radio == '直接入力':
             st.altair_chart(scatter + points, theme=None)
         with col4:
             st.write(f'Km = {Km:.2f}(μg/mL)  \n'
-                    + f'Vmax = {Vmax:.2f}(mg/d)  \n'
-                    + '  \n')
+                    + f'Vmax = {Vmax:.2f}(mg/d)  \n')
         for i in range(num):
             st.write(f'データ{i+1}：{doseList[i]}(mg/d)、{concList[i]}(μg/mL)')
         
-elif radio == 'データ upload':
-    st.write('＝＝＝＝＝＝＝＝')
-    st.write('作成中。。。')
-    st.write('＝＝＝＝＝＝＝＝')
+elif radio == 'データupload':
+    excel_data = st.file_uploader('データ選択', type=['xlsx', 'xls'])
+
+    header = int(st.number_input('タイトル行', min_value=1, step=1, value=1))
+    sheet_name = st.text_input('シート名', value='Sheet1')
+
+    if excel_data:
+        df = pd.read_excel(excel_data, sheet_name=sheet_name,
+                            header=header-1)
+        st.dataframe(df)
+    
+        columns_list = df.columns
+        dose = st.selectbox('投与量データを選択', columns_list)
+        doseList = df[f'{dose}']
+        conc = st.selectbox('血中濃度データを選択', columns_list)
+        concList = df[f'{conc}']
+        
+        btn = st.button('解析')
+        if btn:
+            Vmax, Km, scatter, points = non_linear(doseList, concList)
+            col1, col2 = st.columns([3, 2])
+            with col1:
+                st.altair_chart(scatter + points, theme=None)
+            with col2:
+                st.write(f'Km = {Km:.2f}(μg/mL)  \n'
+                        + f'Vmax = {Vmax:.2f}(mg/d)')

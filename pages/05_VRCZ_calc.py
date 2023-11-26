@@ -66,10 +66,10 @@ if radio == 'スライダー':
     col1, col2 = st.columns(2)
     for i in range(num):
         with col1:
-            d = st.slider(f'１日投与量{num+1}', 0, 600, step=50)
+            d = st.slider(f'１日投与量{i+1}', 0, 600, step=50)
             doseList.append(d)
         with col2:
-            c = st.slider(f'血中濃度{num+1}', 0.0, 10.0, step=0.01)
+            c = st.slider(f'血中濃度{i+1}', 0.0, 10.0, step=0.01)
             concList.append(c)
     st.write('-----------------')
     btn = st.button('解析')

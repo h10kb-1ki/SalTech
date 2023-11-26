@@ -63,7 +63,7 @@ if radio == 'スライダー':
     st.write('-----------------')
     doseList = []
     concList = []
-    col1, col2 = st.columns(2)
+    col1, col5, col2 = st.columns([2,1,2])
     for i in range(num):
         with col1:
             d = st.slider(f'１日投与量{i+1}', 0, 600, step=50)

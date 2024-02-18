@@ -96,6 +96,6 @@ bu = st.checkbox('バックアップ')
 if bu:
     st.download_button(
     label='DownLoad DB',
-    data=db,
+    data='memo.db',
     file_name='memo.db',
 ) 

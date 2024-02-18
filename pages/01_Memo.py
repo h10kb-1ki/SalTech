@@ -92,10 +92,21 @@ if complete:
         df = df.query(f'分類 == "{cat}"')
         df = df[['分類', 'タイトル', '詳細', '期限']]
         st.table(df)
-bu = st.checkbox('バックアップ')
-if bu:
-    st.download_button(
-    label='DownLoad DB',
-    data='memo.db',
-    file_name='memo.db',
-) 
+backup = st.checkbox('バックアップ')
+if backup:
+    db = sqlite3.connect('memo.db')
+    cur = db.cursor()
+    cur.execute("""
+                SELECT * 
+                FROM memo
+                """)
+    data = cur.fetchall()
+    cur.close()
+    db.close()
+    df = pd.DataFrame(data)
+    df.rename(columns={0: '分類', 1: 'タイトル', 2: '詳細', 3: '期限', 4: '状態'}, inplace=True)
+    excel = df.to_excel('memo.xlsx', index=False)
+    st.download_button(label='DownLoad DB',
+                        data=excel,
+                        file_name='memo.xlsx',
+                        ) 

@@ -105,8 +105,13 @@ if backup:
     db.close()
     df = pd.DataFrame(data)
     df.rename(columns={0: '分類', 1: 'タイトル', 2: '詳細', 3: '期限', 4: '状態'}, inplace=True)
-    excel = df.to_excel('memo.xlsx', index=False)
-    st.download_button(label='DownLoad DB',
-                        data=excel,
-                        file_name='memo.xlsx',
-                        ) 
+    def convert_df(df):
+        return df.to_csv().encode('utf-8')
+    csv = convert_df(df)
+
+    st.download_button(
+        label="Download data as CSV",
+        data=csv,
+        file_name='large_df.csv',
+        mime='text/csv',
+        )

@@ -7,7 +7,7 @@ img = Image.open('logo.png')
 st.image(img, use_column_width=True)
 
 st.title('Memo App')
-
+st.write('※※Web App更新時は必ずDBをバックアップする※※')
 mikan = st.checkbox('未完メモ')
 if mikan:
     col1, col2 = st.columns([1,  30])
@@ -92,3 +92,10 @@ if complete:
         df = df.query(f'分類 == "{cat}"')
         df = df[['分類', 'タイトル', '詳細', '期限']]
         st.table(df)
+bu = st.checkbox('バックアップ')
+if bu:
+    st.download_button(
+    label='DownLoad DB',
+    data=db,
+    file_name='memo.db',
+) 

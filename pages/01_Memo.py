@@ -40,7 +40,7 @@ if update:
             with st.form('input_form', clear_on_submit=True):
                 category = st.selectbox('分類', 
                                         ['private', 'work'], 
-                                        index=0)
+                                        index=1)
                 title = st.text_input('タイトル')
                 detail = st.text_input('詳細')
                 deadline = st.date_input('期限')

@@ -18,5 +18,3 @@ google-cloud-vision
 google-oauth
 rembg==2.0.37
 numpy
-
-sqlite3

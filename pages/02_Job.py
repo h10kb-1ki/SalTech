@@ -7,7 +7,7 @@ img = Image.open('logo.png')
 st.image(img, use_column_width=True)
 
 def shift_data():
-    url = 'https://drive.google.com/embeddedfolderview?id=1e-VJXFiRLtIqlTr15VvifmyjJFFbjwp0#list'
+    url = 'https://drive.google.com/embeddedfolderview?id=12Zb899YTrxKT15XXixmuMUXe7s3xQi0x#list'
     res = requests.get(url)
     res.encoding = res.apparent_encoding
     soup = BeautifulSoup(res.text, "html.parser")

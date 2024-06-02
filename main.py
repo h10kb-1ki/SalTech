@@ -56,17 +56,6 @@ if traffic:
 st.write('-----------------------------------------------------')
 weather = st.checkbox('Weather')
 if weather:
-    def weather(weather_info):
-        info = weather_info.text
-        info = info.replace('\n', ': ')
-        info = info.split(': : : ')
-        icon = 'https:' + weather_info.find('img').get('src')
-        return info[2], info[3], info[4], icon  #天気, 最高気温, 最低気温, アイコン
-
-    def rain(info):
-        info = info.split('\n')
-        return info[11], info[12]  #AM降水確率, PM降水確率
-    
     nagoya = st.checkbox('名古屋市の天気')
     if nagoya == True:
         url = 'https://weathernews.jp/onebox/35.152529/136.914405/q=%E6%84%9B%E7%9F%A5%E7%9C%8C%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82&v=ba36a0768da9ec39827acda9415897ef0bccf54cffef6b80c06e56abca48ad88&temp=c&lang=ja'
@@ -109,6 +98,17 @@ if weather:
         res = requests.get(url)
         res.encoding = res.apparent_encoding
         soup = BeautifulSoup(res.text, "html.parser")
+        
+        def weather(weather_info):
+            info = weather_info.text
+            info = info.replace('\n', ': ')
+            info = info.split(': : : ')
+            icon = 'https:' + weather_info.find('img').get('src')
+            return info[2], info[3], info[4], icon  #天気, 最高気温, 最低気温, アイコン
+
+        def rain(info):
+            info = info.split('\n')
+            return info[11], info[12]  #AM降水確率, PM降水確率
         
         card = soup.find_all(class_='wx1day_content')
         today = weather(card[0])

@@ -74,6 +74,17 @@ if weather:
         res.encoding = res.apparent_encoding
         soup = BeautifulSoup(res.text, "html.parser")
 
+        def weather(weather_info):
+            info = weather_info.text
+            info = info.replace('\n', ': ')
+            info = info.split(': : : ')
+            icon = 'https:' + weather_info.find('img').get('src')
+            return info[2], info[3], info[4], icon  #天気, 最高気温, 最低気温, アイコン
+
+        def rain(info):
+            info = info.split('\n')
+            return info[11], info[12]  #AM降水確率, PM降水確率
+
         card = soup.find_all(class_='wx1day_content')
         today = weather(card[0])
         tomorrow = weather(card[1])

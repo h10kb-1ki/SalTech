@@ -56,6 +56,17 @@ if traffic:
 st.write('-----------------------------------------------------')
 weather = st.checkbox('Weather')
 if weather:
+    def weather(weather_info):
+        info = weather_info.text
+        info = info.replace('\n', ': ')
+        info = info.split(': : : ')
+        icon = 'https:' + weather_info.find('img').get('src')
+        return info[2], info[3], info[4], icon  #天気, 最高気温, 最低気温, アイコン
+
+    def rain(info):
+        info = info.split('\n')
+        return info[11], info[12]  #AM降水確率, PM降水確率
+    
     nagoya = st.checkbox('名古屋市の天気')
     if nagoya == True:
         url = 'https://weathernews.jp/onebox/35.152529/136.914405/q=%E6%84%9B%E7%9F%A5%E7%9C%8C%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82&v=ba36a0768da9ec39827acda9415897ef0bccf54cffef6b80c06e56abca48ad88&temp=c&lang=ja'
@@ -63,68 +74,48 @@ if weather:
         res.encoding = res.apparent_encoding
         soup = BeautifulSoup(res.text, "html.parser")
 
-        day_ = soup.find_all(class_='wTable__item')
-        today = day_[5].text
-        tomorrow = day_[10].text
-        data = soup.find_all(class_='text wTable__item')
-        data_list = []
-        for i in range(0, 8):
-            kakuritu_kion = data[i].text
-            data_list.append(kakuritu_kion)
-        icon = soup.find_all(class_='day2Table__item weather')
-        icon_today = 'https:' + icon[0].find('img').get('src')
-        icon_tomorrow = 'https:' + icon[1].find('img').get('src')
-        title = soup.find(class_='tit-02').text
-        info = soup.find(class_='comment no-ja')
-        comment = info.text
-        comment = comment.split('\n')[2]
+        card = soup.find_all(class_='wx1day_content')
+        today = weather(card[0])
+        tomorrow = weather(card[1])
 
-        st.write(title)
-        st.write(comment)
-        st.write('■ '+ today)
-        st.image(icon_today)
-        st.write('最高気温:'+ data_list[0] +'　最低気温:'+ data_list[1])
-        st.write('午前：'+ data_list[2] +'　午後：'+ data_list[3])
-
-        st.write('■'+ tomorrow)
-        st.image(icon_tomorrow)
-        st.write('最高気温:'+ data_list[4] +'　最低気温:'+ data_list[5])
-        st.write('午前：'+ data_list[6] +'　午後：'+ data_list[7])
+        rain_pc = soup.find_all(class_='precipitation')
+        today_rain =rain(rain_pc[0].text)
+        tmrw_rain = rain(rain_pc[1].text)
+        st.write('■今日の天気')
+        st.image(today[3])
+        st.write(f'{today[0]}  \n'
+                + f'{today[1]}、{today[2]}  \n'
+                + f'AM: {today_rain[0]}、PM: {today_rain[1]}')
+        st.write('■明日の天気')
+        st.image(tomorrow[3])
+        st.write(f'{tomorrow[0]}  \n'
+                + f'{tomorrow[1]}、{tomorrow[2]}  \n'
+                + f'AM: {tmrw_rain[0]}、PM: {tmrw_rain[1]}')       
 
     anjo = st.checkbox('安城市の天気')
     if anjo == True:
-        url = 'https://weathernews.jp/onebox/34.941939/137.086575/q=%E6%84%9B%E7%9F%A5%E7%9C%8C%E5%AE%89%E5%9F%8E%E5%B8%82%E5%AE%89%E5%9F%8E%E7%94%BA&v=f76c962ed76dfb70c19ac3765fa855ccf555678b4df6046c50cd0ddda9c76c6b&temp=c&lang=ja'
+        url = 'https://weathernews.jp/onebox/34.948663/137.079025/q=%E6%84%9B%E7%9F%A5%E7%9C%8C%E5%AE%89%E5%9F%8E%E5%B8%82&v=3fa1edac9382759435af39576ac457ebaf29245456fafb5ff44b458182f4cbbc&temp=c&lang=ja'
         res = requests.get(url)
         res.encoding = res.apparent_encoding
         soup = BeautifulSoup(res.text, "html.parser")
+        
+        card = soup.find_all(class_='wx1day_content')
+        today = weather(card[0])
+        tomorrow = weather(card[1])
 
-        day_ = soup.find_all(class_='wTable__item')
-        today = day_[5].text
-        tomorrow = day_[10].text
-        data = soup.find_all(class_='text wTable__item')
-        data_list = []
-        for i in range(0, 8):
-            kakuritu_kion = data[i].text
-            data_list.append(kakuritu_kion)
-        icon = soup.find_all(class_='day2Table__item weather')
-        icon_today = 'https:' + icon[0].find('img').get('src')
-        icon_tomorrow = 'https:' + icon[1].find('img').get('src')
-        title = soup.find(class_='tit-02').text
-        info = soup.find(class_='comment no-ja')
-        comment = info.text
-        comment = comment.split('\n')[2]
-
-        st.write(title)
-        st.write(comment)
-        st.write('■ '+ today)
-        st.image(icon_today)
-        st.write('最高気温:'+ data_list[0] +'　最低気温:'+ data_list[1])
-        st.write('午前：'+ data_list[2] +'　午後：'+ data_list[3])
-
-        st.write('■'+ tomorrow)
-        st.image(icon_tomorrow)
-        st.write('最高気温:'+ data_list[4] +'　最低気温:'+ data_list[5])
-        st.write('午前：'+ data_list[6] +'　午後：'+ data_list[7])
+        rain_pc = soup.find_all(class_='precipitation')
+        today_rain =rain(rain_pc[0].text)
+        tmrw_rain = rain(rain_pc[1].text)
+        st.write('■今日の天気')
+        st.image(today[3])
+        st.write(f'{today[0]}  \n'
+                + f'{today[1]}、{today[2]}  \n'
+                + f'AM: {today_rain[0]}、PM: {today_rain[1]}')
+        st.write('■明日の天気')
+        st.image(tomorrow[3])
+        st.write(f'{tomorrow[0]}  \n'
+                + f'{tomorrow[1]}、{tomorrow[2]}  \n'
+                + f'AM: {tmrw_rain[0]}、PM: {tmrw_rain[1]}')
 
     st.write('▶[雨雲レーダー](https://tenki.jp/radar/map/)')
 

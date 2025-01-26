@@ -3,7 +3,7 @@ import qrcode
 from PIL import Image
 
 img = Image.open('logo.png')
-st.image(img, use_column_width=True)
+st.image(img)
 
 st.title('QRコード生成')
 

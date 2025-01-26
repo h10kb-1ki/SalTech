@@ -3,7 +3,7 @@ import streamlit as st
 from PIL import Image
 
 img = Image.open('logo.png')
-st.image(img, use_column_width=True)
+st.image(img)
 
 st.title('抗菌薬データ検索')
 radio = st.radio('検索対象', ['抗菌薬', '細菌'])

@@ -8,7 +8,7 @@ from google.oauth2 import service_account
 from google.cloud import vision
 
 img = Image.open('logo.png')
-st.image(img, use_column_width=True)
+st.image(img)
 
 st.title('光学文字認識')
 st.write('---Powered by google Cloud Vision---')

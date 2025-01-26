@@ -4,7 +4,7 @@ import pandas as pd
 from PIL import Image
 
 img = Image.open('logo.png')
-st.image(img, use_column_width=True)
+st.image(img)
 
 st.title('Memo App')
 st.write('※※Web App更新時は必ずDBをバックアップする※※')

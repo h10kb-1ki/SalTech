@@ -5,7 +5,7 @@ from io import BytesIO
 import base64
 
 img = Image.open('logo.png')
-st.image(img, use_column_width=True)
+st.image(img)
 
 st.set_page_config(layout="wide", page_title="Image Background Remover")
 

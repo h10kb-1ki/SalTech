@@ -21,7 +21,7 @@ img = Image.open('logo.png')
 st.image(img)
 
 st.write('-----------------------------------------------------')
-traffic = st.checkbox('Traffic')
+traffic = st.checkbox('交通情報')
 if traffic:
     st.write('■東海道本線[豊橋～米原]')
     url = 'https://transit.yahoo.co.jp/traininfo/detail/192/193/'
@@ -54,12 +54,12 @@ if traffic:
 
 
 st.write('-----------------------------------------------------')
-weather = st.checkbox('Weather')
+weather = st.checkbox('天気')
 if weather:
     st.write('▶[雨雲レーダー](https://tenki.jp/radar/map/)')
 
 st.write('-----------------------------------------------------')
-news = st.checkbox('NEWS')
+news = st.checkbox('ニュース')
 if news:
     yahoo = st.checkbox('Yahoo! ニュース トピックス')
     if yahoo == True:
@@ -156,12 +156,6 @@ if Finance:
                 "axes.labelsize":15, "axes.labelcolor":"black"})
     fig = mpf.plot(df, type='candle', volume=True, mav=(5, 25, 50), figratio=(12,4), style=cs)
     st.pyplot(fig)
-
-
-st.write('-----------------------------------------------------')  
-hobby = st.checkbox('Hobby & Health')
-if hobby:
-    st.write('▶[Pep Up](https://pepup.life/home)')
 
 st.write('-----------------------------------------------------')                
 MyLib = st.checkbox('Library')

@@ -156,9 +156,3 @@ if Finance:
                 "axes.labelsize":15, "axes.labelcolor":"black"})
     fig = mpf.plot(df, type='candle', volume=True, mav=(5, 25, 50), figratio=(12,4), style=cs)
     st.pyplot(fig)
-
-st.write('-----------------------------------------------------')                
-MyLib = st.checkbox('Library')
-if MyLib:
-    st.write('▶[一郎の部屋](https://sites.google.com/view/tdmichiro/%E3%83%9B%E3%83%BC%E3%83%A0)')
-    st.write('▶[DIサイト](https://ajdididi-di-search-aydtef.streamlit.app/)')

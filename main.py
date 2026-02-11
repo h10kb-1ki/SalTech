@@ -7,7 +7,7 @@ import io
 import re
 from pandas_datareader import data
 import pandas as pd
-from dateutil.relativedelta import relativedelta  #Python 3.12以降では distutils が削除された
+#from dateutil.relativedelta import relativedelta  #Python 3.12以降では distutils が削除された
 import mplfinance as mpf
 import altair as alt
 import openpyxl as xl
@@ -90,7 +90,7 @@ if news:
                 title = titles[i].text
                 link = ref[i].attrs['href']
                 st.write(f'・[{title}]({link})')
-
+"""
 st.write('-----------------------------------------------------')                
 Finance = st.checkbox('Finance')
 if Finance:
@@ -136,3 +136,4 @@ if Finance:
                 "axes.labelsize":15, "axes.labelcolor":"black"})
     fig = mpf.plot(df, type='candle', volume=True, mav=(5, 25, 50), figratio=(12,4), style=cs)
     st.pyplot(fig)
+"""

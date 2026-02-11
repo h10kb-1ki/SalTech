@@ -7,7 +7,7 @@ import io
 import re
 from pandas_datareader import data
 import pandas as pd
-from dateutil.relativedelta import relativedelta
+from dateutil.relativedelta import relativedelta  #Python 3.12以降では distutils が削除された
 import mplfinance as mpf
 import altair as alt
 import openpyxl as xl

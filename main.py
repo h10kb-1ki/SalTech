@@ -91,26 +91,6 @@ if news:
                 link = ref[i].attrs['href']
                 st.write(f'・[{title}]({link})')
 
-st.write('-----------------------------------------------------')
-LINE = st.checkbox('LINE')
-if LINE:
-    msg = st.text_input('メッセージを入力')
-    pwd = st.text_input('パスワードを入力')
-    btn = st.button('送信')
-    if btn:
-        TOKEN = 'z3URXwam5ZTJGzT40xNF64f6gFwDkjd5GJlH4h9D79'
-        api_url = 'https://notify-api.line.me/api/notify'
-
-        TOKEN_dic = {'Authorization': 'Bearer'+' '+TOKEN + pwd}
-        send_dic = {'message': msg}
-        res = requests.post(api_url, headers=TOKEN_dic, data=send_dic)
-
-        if res.status_code == 200:
-            st.write('送信完了')
-            st.balloons()
-        else:
-            st.write('送信に失敗しました')
-
 st.write('-----------------------------------------------------')                
 Finance = st.checkbox('Finance')
 if Finance:

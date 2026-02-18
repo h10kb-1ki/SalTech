@@ -5,7 +5,7 @@ import datetime
 from PIL import Image
 import io
 import re
-from pandas_datareader import data
+#from pandas_datareader import data  #requirements.txtからも削除
 import pandas as pd
 #from dateutil.relativedelta import relativedelta  #Python 3.12以降では distutils が削除された
 import mplfinance as mpf

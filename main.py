@@ -13,7 +13,7 @@ import altair as alt
 import openpyxl as xl
 import seaborn as sns
 import matplotlib.pyplot as plt
-import japanize_matplotlib
+#import japanize_matplotlib
 
 st.set_page_config(layout="wide")
 

@@ -1,7 +1,11 @@
 import streamlit as st
 import sqlite3
+from PIL import Image
 
-st.title('医薬品DB横断検索')
+img = Image.open('logo.png')
+st.image(img)
+
+st.title('DB横断検索')
 st.write('')
 
 kensaku = st.text_input('キーワード')
@@ -20,7 +24,7 @@ if btn1:
         cur.close()
         db1.close()
 
-        st.subheader('医薬品メモDB')
+        st.subheader('医薬品メモDB', divider="orange")
         if len(data) == 0:
              st.write('該当データなし')
         else:
@@ -39,7 +43,7 @@ if btn1:
                   st.markdown('---')
         st.write('')
         #医薬品供給DB
-        st.subheader('医薬品供給DB')
+        st.subheader('医薬品供給DB', divider="orange")
         db2 = sqlite3.connect('drug_supply.db')
         cur = db2.cursor()    
         #解消していない案件

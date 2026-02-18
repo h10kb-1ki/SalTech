@@ -10,6 +10,7 @@ st.write('')
 
 kensaku = st.text_input('キーワード')
 btn1 = st.button('検索')
+st.write('')
 
 if btn1:
     if kensaku == '':

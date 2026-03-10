@@ -20,7 +20,7 @@ if btn1:
         # 医薬品メモDB
         db1 = sqlite3.connect('drug_memo.db')
         cur = db1.cursor()
-        cur.execute(f"SELECT * FROM memo WHERE (drug LIKE ? OR tag LIKE ? OR memo LIKE ?)", [kensaku, kensaku, kensaku])
+        cur.execute(f"SELECT * FROM memo WHERE (drug LIKE ? OR tag LIKE ? OR memo LIKE ?) ORDER BY tag ASC", [kensaku, kensaku, kensaku])
         data = cur.fetchall()
         cur.close()
         db1.close()
